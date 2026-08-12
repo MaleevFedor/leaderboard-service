@@ -19,10 +19,29 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // REST API, контроллеры, JSON, встроенный Tomcat
     implementation 'org.springframework.boot:spring-boot-starter-webmvc'
+
+    // @Valid, @NotBlank, @Positive и так далее
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // JPA, Hibernate, repositories, транзакции
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Миграции базы
+    implementation 'org.springframework.boot:spring-boot-starter-flyway'
+    runtimeOnly 'org.flywaydb:flyway-database-postgresql'
+
+    // PostgreSQL JDBC driver
     runtimeOnly 'org.postgresql:postgresql'
+
+    // /actuator/health и /actuator/info
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    //redis driver
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // Тесты
     testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-validation-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
