@@ -1,9 +1,6 @@
 package dev.fedormaleev.leaderboardservice.score.persistence;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -13,6 +10,7 @@ import java.util.UUID;
 @Table(name = "score_events")
 public class ScoreEventEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Column(name = "leaderboard_id", nullable = false, length = 64)
@@ -34,14 +32,12 @@ public class ScoreEventEntity {
     }
 
     public ScoreEventEntity(
-            UUID id,
             String leaderboardId,
             String userId,
             long points,
             Instant occurredAt,
             Instant createdAt
     ) {
-        this.id = id;
         this.leaderboardId = leaderboardId;
         this.userId = userId;
         this.points = points;
