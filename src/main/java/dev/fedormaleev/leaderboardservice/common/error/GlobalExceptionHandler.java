@@ -53,4 +53,17 @@ public class GlobalExceptionHandler {
 
         return problem;
     }
+
+    @ExceptionHandler(NoUserInLeaderboardException.class)
+    public ProblemDetail handleMissingUser(
+            NoUserInLeaderboardException exception
+    ) {
+        ProblemDetail problem =
+                ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
+
+        problem.setTitle("Resource not found");
+        problem.setDetail(exception.getMessage());
+
+        return problem;
+    }
 }

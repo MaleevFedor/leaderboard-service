@@ -33,4 +33,14 @@ public class RankingController {
         return new RankResponse(leaderboardId, userId,
                 rankingService.getRank(leaderboardId, userId), Instant.now());
     }
+
+    @GetMapping("/user/{userId}/get-rank")
+    @ResponseStatus(HttpStatus.OK)
+    public LeaderboardResponse getAround(
+            @PathVariable String leaderboardId,
+            @PathVariable String userId,
+            @RequestParam long radius
+    ){
+        return rankingService.around(leaderboardId, userId, radius);
+    }
 }

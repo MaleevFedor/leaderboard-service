@@ -94,4 +94,30 @@ public class RankingService {
 
         return rank + 1;
     }
+
+    public LeaderboardResponse around(String leaderboardId, String userId, long radius){
+        long top = getRank(leaderboardId, userId) - radius;
+        if (top < 0){
+            top = 0;
+        }
+
+        long bottom = top + radius * 2;
+
+        Set<ZSetOperations.TypedTuple<String>> tuples = redisLeaderboardRepository.getTop(leaderboardId, bottom);
+
+        List<LeaderboardElement> elements = new ArrayList<>();
+
+        int rank = 1;
+
+        for (var elem : tuples) {
+            if (rank >= top) {
+                elements.add(new LeaderboardElement(elem.getValue(), elem.getScore().longValue(), rank, Instant.now()));
+            }
+            rank++;
+        }
+
+        log.info("Top of leaderboard id: " + leaderboardId + " fetched.");
+
+        return new LeaderboardResponse(leaderboardId, elements);
+    }
 }
