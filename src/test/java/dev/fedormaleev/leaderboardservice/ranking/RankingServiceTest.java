@@ -3,6 +3,7 @@ package dev.fedormaleev.leaderboardservice.ranking;
 import dev.fedormaleev.leaderboardservice.ranking.persistence.LeaderboardScoreEntity;
 import dev.fedormaleev.leaderboardservice.ranking.persistence.LeaderboardScoreId;
 import dev.fedormaleev.leaderboardservice.ranking.persistence.LeaderboardScoreRepository;
+import dev.fedormaleev.leaderboardservice.ranking.persistence.RedisLeaderboardRepository;
 import dev.fedormaleev.leaderboardservice.ranking.service.RankingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,13 +24,15 @@ class RankingServiceTest {
 
     @Mock
     private LeaderboardScoreRepository leaderboardScoreRepository;
+    private RedisLeaderboardRepository redisLeaderboardRepository;
 
     private RankingService rankingService;
 
     @BeforeEach
     void setUp() {
         rankingService = new RankingService(
-                leaderboardScoreRepository
+                leaderboardScoreRepository,
+                redisLeaderboardRepository
         );
     }
 
