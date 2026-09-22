@@ -1,4 +1,4 @@
-package dev.fedormaleev.leaderboardservice.score.api;
+package dev.fedormaleev.leaderboardservice.score.api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

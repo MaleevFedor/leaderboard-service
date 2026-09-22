@@ -2,7 +2,7 @@ package dev.fedormaleev.leaderboardservice.score.persistence;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import dev.fedormaleev.leaderboardservice.score.api.ScoreEventElement;
+import dev.fedormaleev.leaderboardservice.score.api.dto.ScoreEventElement;
 
 import java.util.List;
 import java.util.UUID;

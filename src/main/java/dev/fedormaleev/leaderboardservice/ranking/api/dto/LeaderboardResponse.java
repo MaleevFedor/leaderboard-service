@@ -1,4 +1,4 @@
-package dev.fedormaleev.leaderboardservice.ranking.api;
+package dev.fedormaleev.leaderboardservice.ranking.api.dto;
 
 
 import java.util.List;

@@ -1,5 +1,8 @@
 package dev.fedormaleev.leaderboardservice.score.api;
 
+import dev.fedormaleev.leaderboardservice.score.api.dto.AddScoreRequest;
+import dev.fedormaleev.leaderboardservice.score.api.dto.AddScoreResponse;
+import dev.fedormaleev.leaderboardservice.score.api.dto.GetScoreEventsResponse;
 import dev.fedormaleev.leaderboardservice.score.service.ScoreService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

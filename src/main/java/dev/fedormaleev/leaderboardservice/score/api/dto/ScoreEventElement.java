@@ -1,4 +1,4 @@
-package dev.fedormaleev.leaderboardservice.score.api;
+package dev.fedormaleev.leaderboardservice.score.api.dto;
 
 import java.time.Instant;
 

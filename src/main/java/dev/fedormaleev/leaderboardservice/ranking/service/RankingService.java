@@ -1,7 +1,9 @@
 package dev.fedormaleev.leaderboardservice.ranking.service;
 
-import dev.fedormaleev.leaderboardservice.ranking.api.LeaderboardElement;
-import dev.fedormaleev.leaderboardservice.ranking.api.LeaderboardResponse;
+import dev.fedormaleev.leaderboardservice.common.error.NoUserInLeaderboardException;
+import dev.fedormaleev.leaderboardservice.ranking.api.dto.LeaderboardElement;
+import dev.fedormaleev.leaderboardservice.ranking.api.dto.LeaderboardResponse;
+import dev.fedormaleev.leaderboardservice.ranking.api.dto.RankResponse;
 import dev.fedormaleev.leaderboardservice.ranking.persistence.LeaderboardScoreEntity;
 import dev.fedormaleev.leaderboardservice.ranking.persistence.LeaderboardScoreId;
 import dev.fedormaleev.leaderboardservice.ranking.persistence.LeaderboardScoreRepository;
@@ -54,7 +56,7 @@ public class RankingService {
 
         redisLeaderboardRepository.incrementScore(leaderboardId, userId, points);
 
-        log.info("Leaderboard successfully updated");
+        log.info("Leaderboard successfully updated.");
     }
 
     public LeaderboardResponse getTop(String leaderboardId, long limit){
@@ -69,6 +71,27 @@ public class RankingService {
             rank++;
         }
 
+        log.info("Top of leaderboard id: " + leaderboardId + " fetched.");
+
         return new LeaderboardResponse(leaderboardId, elements);
+    }
+
+    public long getRank(
+            String leaderboardId,
+            String userId
+    ) {
+        Long rank = redisLeaderboardRepository.getRank(
+                leaderboardId,
+                userId
+        );
+
+        if (rank == null) {
+            throw new NoUserInLeaderboardException(
+                    leaderboardId,
+                    userId
+            );
+        }
+
+        return rank + 1;
     }
 }

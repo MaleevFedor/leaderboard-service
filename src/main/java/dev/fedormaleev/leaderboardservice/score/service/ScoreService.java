@@ -1,9 +1,9 @@
 package dev.fedormaleev.leaderboardservice.score.service;
 
 import dev.fedormaleev.leaderboardservice.ranking.service.RankingService;
-import dev.fedormaleev.leaderboardservice.score.api.AddScoreRequest;
-import dev.fedormaleev.leaderboardservice.score.api.AddScoreResponse;
-import dev.fedormaleev.leaderboardservice.score.api.GetScoreEventsResponse;
+import dev.fedormaleev.leaderboardservice.score.api.dto.AddScoreRequest;
+import dev.fedormaleev.leaderboardservice.score.api.dto.AddScoreResponse;
+import dev.fedormaleev.leaderboardservice.score.api.dto.GetScoreEventsResponse;
 import dev.fedormaleev.leaderboardservice.score.persistence.ScoreEventEntity;
 import dev.fedormaleev.leaderboardservice.score.persistence.ScoreEventRepository;
 import org.slf4j.Logger;
