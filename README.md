@@ -11,9 +11,9 @@ A Java / Spring Boot REST API for recording score events and maintaining leaderb
 - 🗄️ PostgreSQL persistence with automatic Flyway migrations
 - ✅ Request validation and structured `ProblemDetail` error responses
 - 🩺 Health and information endpoints through Spring Boot Actuator
-- 🐳 Docker Compose setup for PostgreSQL and Redis
+- 🐳 Fully containerized setup with Docker Compose for the Spring Boot application, PostgreSQL, and Redis
 
-> **Development status:** The current `RankingController` maps both rank lookup and the in-progress “around user” handler to `GET /api/leaderboard/{leaderboardId}/user/{userId}/get-rank`. This creates an ambiguous mapping and blocks application startup. The handlers need distinct mappings before the API can run; the setup and examples below apply once that conflict is resolved.
+
 
 ## 🌐 Live Demo
 
@@ -38,10 +38,10 @@ flowchart TB
     client --> rankingApi["RankingController<br/>Top entries and user ranks"]
 
     subgraph app["Spring Boot application · host"]
+        flyway["Flyway migrations"]
         scoreApi --> scoreService["ScoreService"]
         scoreService --> rankingService["RankingService"]
         rankingApi --> rankingService
-        flyway["Flyway migrations"]
         actuator["Actuator<br/>health and info"]
     end
 
@@ -106,14 +106,13 @@ Docker Compose reads `.env` automatically. Spring Boot uses matching defaults fr
 
 If you customize these values, also set `DATABASE_URL`, `DATABASE_USERNAME`, and `DATABASE_PASSWORD` in the environment of the shell or IDE that starts Spring Boot; it does not automatically load this `.env` file. Keep the database name in `DATABASE_URL` consistent with `DATABASE_NAME`. The Compose PostgreSQL health check hardcodes the `leaderboard` user and database, so update it too if either changes. Redis defaults to `localhost:6379` and can be configured with `REDIS_HOST` and `REDIS_PORT`.
 
-### 3. Start PostgreSQL and Redis
+### 3. Start Docker Compose
 
 ```bash
-docker compose up -d
-docker compose ps
+docker compose up --build
 ```
 
-Wait for PostgreSQL to become healthy. Compose starts the two data services; the repository does not include an application Dockerfile or application service in Compose.
+Wait for PostgreSQL to become healthy.
 
 ### 4. Start the application
 
