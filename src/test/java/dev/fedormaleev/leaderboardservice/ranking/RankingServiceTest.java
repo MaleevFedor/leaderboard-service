@@ -24,6 +24,7 @@ class RankingServiceTest {
 
     @Mock
     private LeaderboardScoreRepository leaderboardScoreRepository;
+    @Mock
     private RedisLeaderboardRepository redisLeaderboardRepository;
 
     private RankingService rankingService;

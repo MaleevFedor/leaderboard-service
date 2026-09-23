@@ -61,4 +61,21 @@ public class RedisLeaderboardRepository {
                         userId
                 );
     }
+
+
+    public void deleteLeaderboard(String leaderboardId) {
+        redisTemplate.delete(getKey(leaderboardId));
+    }
+
+    public void setScore(
+            String leaderboardId,
+            String userId,
+            long score
+    ) {
+        redisTemplate.opsForZSet().add(
+                getKey(leaderboardId),
+                userId,
+                score
+        );
+    }
 }

@@ -34,7 +34,7 @@ public class RankingController {
                 rankingService.getRank(leaderboardId, userId), Instant.now());
     }
 
-    @GetMapping("/user/{userId}/get-rank")
+    @GetMapping("/user/{userId}/around")
     @ResponseStatus(HttpStatus.OK)
     public LeaderboardResponse getAround(
             @PathVariable String leaderboardId,
