@@ -15,10 +15,6 @@ A Java / Spring Boot REST API for recording score events and maintaining leaderb
 
 
 
-## 🌐 Live Demo
-
-No public demo URL is documented in the repository. The local API uses [http://localhost:8080](http://localhost:8080) after successful startup. This project exposes a REST API; it does not include a browser UI.
-
 ## 🏗️ Architecture
 
 The application is organized into two main modules:
